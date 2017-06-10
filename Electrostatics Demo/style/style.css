@@ -1,0 +1,88 @@
+h1 {
+	font-family: "Arial";
+	font-size: 50px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 20px;
+	text-align: center;
+}
+
+#canvasContainter {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 900px;
+}
+
+#containter {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width: 900px;
+	position: absolute;
+	text-align: center;
+}
+
+canvas {
+	position: absolute;
+	border: 2px solid #000000;
+}
+
+#arrows {
+	z-index: -1;
+	background: transparent;
+}
+
+#dummy {
+	z-index: -2;
+	background: transparent;
+}
+
+#demo {
+	z-index: -3;
+	background: #c1c16a;
+}
+
+#slider {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	z-index: 1;
+	width: 900px;
+}
+
+#charge {
+	font-family: "Arial";
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 26.4px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1;
+	width: 900px;
+	text-align: center;
+}
+
+#help {
+	display: block;
+	position: relative;
+	font-weight: 300;
+	font-size: 14px;
+	font-family: Arial;
+	text-decoration: none;
+	text-align: center;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	height: 32px;
+	line-height: 32px;
+	padding: 0px 25.6px;
+	margin: 10px auto;
+	background: #326cff;
+}
