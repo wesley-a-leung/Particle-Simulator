@@ -51,6 +51,11 @@ class Demo {
 					demo.dummyParticle.velocityArrow.y + (demo.dummyParticle.velocityArrow.y - yCur)); 
 			} // if
 		}); // anon function (mousemove)
+		this.arrowCanvas.addEventListener('click', function(event) {
+			let x = event.pageX - this.offsetLeft;
+			let y = event.pageY - this.offsetTop;
+			demo.particlePool.markClicked(x, y);
+		}); // anon function (click)
 		document.addEventListener('mouseup', function(event) { // the mouseup listener is placed in the the document
 		                                                       // in case the user moves the mouse outside the canvas
 			if (demo.dummyParticle) { // if a dummy particle exists

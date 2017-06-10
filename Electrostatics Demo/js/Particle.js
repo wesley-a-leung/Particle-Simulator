@@ -32,10 +32,12 @@ class Particle extends DrawableCircle {
 		this.acceleration = acceleration;
 		this.fixed = fixed;
 		this.alive = true;
+		this.clicked = false;
+		this.inCollision = false; // to help with collision detection
 	} // spawn function
 
 	/*
-	 * Rreturns the distance squared between this particle and Particle B.
+	 * Returns the distance squared between this particle and Particle B.
 	 */
 	distSqTo(B) {
 		return (this.x - B.x) * (this.x - B.x) + (this.y - B.y) * (this.y - B.y);
@@ -100,5 +102,7 @@ class Particle extends DrawableCircle {
 		this.acceleration = new Vector(0, 0);
 		this.fixed = true;
 		this.alive = false;
+		this.clicked = false;
+		this.inCollision = false;
 	} // reset function
 } // Particle class

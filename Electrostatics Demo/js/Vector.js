@@ -26,7 +26,7 @@ class Vector {
 	} // magnitude function
 
 	/*
-	 * Returns the angle (between -pi and pi) that the vector is pointing.
+	 * Returns the angle (between -pi and pi) that the vector is pointing relative to horizontal.
 	 */
 	angle() {
 		return Math.atan2(this.y, this.x);
