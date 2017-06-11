@@ -31,6 +31,9 @@ class Particle extends DrawableCircle {
 		this.velocity = velocity;
 		this.acceleration = acceleration;
 		this.fixed = fixed;
+		if (fixed) { // a fixed particle can be mimiced by a very large mass for collisions
+			mass = 1e12;
+		} // if
 		this.alive = true;
 		this.clicked = false;
 		this.inCollision = false; // to help with collision detection
