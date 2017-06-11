@@ -103,7 +103,7 @@ class ParticlePool {
 					let v1fy = v1fxr * Math.sin(phi) + v1yr * Math.sin(phi + Math.PI / 2);
 					let v2fx = v2fxr * Math.cos(phi) + v2yr * Math.cos(phi + Math.PI / 2);
 					let v2fy = v2fxr * Math.sin(phi) + v2yr * Math.sin(phi + Math.PI / 2);
-					this._pool[i].velocity = new Vector(v1fx, v1fy);
+					if (!this._pool[i].fixed) this._pool[i].velocity = new Vector(v1fx, v1fy);
 					if (!this._pool[j].fixed) this._pool[j].velocity = new Vector(v2fx, v2fy);
 				} // if
 			} // for j
