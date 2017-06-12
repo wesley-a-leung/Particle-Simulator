@@ -52,10 +52,11 @@ class ParticlePool {
 				if (!B.alive) break; // all particles afterward are 'dead'
 				// calculated electric force of B on A
 				let electricForce = B.electricForceOn(A);
-				this._pool[i].acceleration.add(new Vector(electricForce.x / A.mass, electricForce.y / A.mass));
+				// fixed particles should not change acceleration
+				if (!A.fixed) this._pool[i].acceleration.add(new Vector(electricForce.x / A.mass, electricForce.y / A.mass));
 				// acceleration of particle B is changed by the same magnitude, but in the opposite direction of particle A
 				// according to Newton's 2nd Law
-				this._pool[j].acceleration.add(new Vector(-electricForce.x / B.mass, -electricForce.y / B.mass));
+				if (!B.fixed) this._pool[j].acceleration.add(new Vector(-electricForce.x / B.mass, -electricForce.y / B.mass));
 			} // for j
 		} // for i
 	} // update function
@@ -73,38 +74,39 @@ class ParticlePool {
 				let B = this._pool[j];
 				if (!B.alive) break; // all particles afterward are 'dead'
 				if (A.distSqTo(B) <= (A.radius + B.radius) * (A.radius + B.radius)) { // overlap
-					// TODO fix particle collisions
-					// no acceleration during a collision 
-					// this._pool[i].acceleration = new Vector(0, 0);
-					// this._pool[j].acceleration = new Vector(0, 0);
+					// TODO Fix charged particles collisions
 					collisions[i] = true; // mark particles in a collision
 					collisions[j] = true;
-					if (A.inCollision && B.inCollision) continue; // don't update velocities if they are still overlapping
-					// collision is calculated by rotating the the axis to become parallel to the x axis, solving
-					// in one dimension for both x and y, then rotating back to the original axis
-					// INITIAL VALUES
-					let theta1 = A.velocity.angle(); // direction of particle A
-					let theta2 = B.velocity.angle(); // direction of particle B
-					let phi = A.angleTo(B); // angle of collision
-					let v1 = A.velocity.magnitude(); // magnitude of the velocity of particle A
-					let v2 = B.velocity.magnitude(); // magnitude of the velocity of particle B
-					let m1 = A.mass;
-					let m2 = B.mass;
-					// INITIAL VELOCITY COMPONENTS ON ROTATED AXIS
-					let v1xr = v1 * Math.cos(theta1 - phi); // x velocity of particle A on rotated axis
-					let v1yr = v1 * Math.sin(theta1 - phi); // y velocity of particle A on rotated axis
-					let v2xr = v2 * Math.cos(theta2 - phi); // x velocity of particle B on rotated axis
-					let v2yr = v2 * Math.sin(theta2 - phi); // y velocity of particle B on rotated axis
-					// FINAL VELOCITY COMPONENTS ON ROTATED AXIS (only 1 dimension is needed to solve)
-					let v1fxr = (v1xr * (m1 - m2) + 2 * m2 * v2xr) / (m1 + m2); // 1D collision formula
-					let v2fxr = (v2xr * (m2 - m1) + 2 * m1 * v1xr) / (m1 + m2);
-					// FINAL VELOCITY COMPONENTS ROTATE BACK TO ORIGINAL AXIS
-					let v1fx = v1fxr * Math.cos(phi) + v1yr * Math.cos(phi + Math.PI / 2);
-					let v1fy = v1fxr * Math.sin(phi) + v1yr * Math.sin(phi + Math.PI / 2);
-					let v2fx = v2fxr * Math.cos(phi) + v2yr * Math.cos(phi + Math.PI / 2);
-					let v2fy = v2fxr * Math.sin(phi) + v2yr * Math.sin(phi + Math.PI / 2);
-					if (!this._pool[i].fixed) this._pool[i].velocity = new Vector(v1fx, v1fy);
-					if (!this._pool[j].fixed) this._pool[j].velocity = new Vector(v2fx, v2fy);
+					if (!A.inCollision || !B.inCollision) { // don't update velocities if they are still overlapping
+						// collision is calculated by rotating the the axis to become parallel to the x axis, solving
+						// in one dimension for both x and y, then rotating back to the original axis
+						// INITIAL VALUES
+						let theta1 = A.velocity.angle(); // direction of particle A
+						let theta2 = B.velocity.angle(); // direction of particle B
+						let phi = A.angleTo(B); // angle of collision
+						let v1 = A.velocity.magnitude(); // magnitude of the velocity of particle A
+						let v2 = B.velocity.magnitude(); // magnitude of the velocity of particle B
+						let m1 = A.mass;
+						let m2 = B.mass;
+						// INITIAL VELOCITY COMPONENTS ON ROTATED AXIS
+						let v1xr = v1 * Math.cos(theta1 - phi); // x velocity of particle A on rotated axis
+						let v1yr = v1 * Math.sin(theta1 - phi); // y velocity of particle A on rotated axis
+						let v2xr = v2 * Math.cos(theta2 - phi); // x velocity of particle B on rotated axis
+						let v2yr = v2 * Math.sin(theta2 - phi); // y velocity of particle B on rotated axis
+						// FINAL VELOCITY COMPONENTS ON ROTATED AXIS (only 1 dimension is needed to solve)
+						let v1fxr = (v1xr * (m1 - m2) + 2 * m2 * v2xr) / (m1 + m2); // 1D collision formula
+						let v2fxr = (v2xr * (m2 - m1) + 2 * m1 * v1xr) / (m1 + m2);
+						// FINAL VELOCITY COMPONENTS ROTATE BACK TO ORIGINAL AXIS
+						let v1fx = v1fxr * Math.cos(phi) + v1yr * Math.cos(phi + Math.PI / 2);
+						let v1fy = v1fxr * Math.sin(phi) + v1yr * Math.sin(phi + Math.PI / 2);
+						let v2fx = v2fxr * Math.cos(phi) + v2yr * Math.cos(phi + Math.PI / 2);
+						let v2fy = v2fxr * Math.sin(phi) + v2yr * Math.sin(phi + Math.PI / 2);
+						this._pool[i].velocity = new Vector(v1fx, v1fy);
+						this._pool[j].velocity = new Vector(v2fx, v2fy);
+					} // if
+					// fixed particles should not change velocity
+					if (A.fixed) this._pool[i].velocity = new Vector(0, 0);
+					if (B.fixed) this._pool[j].velocity = new Vector(0, 0);
 				} // if
 			} // for j
 		} // for i	
