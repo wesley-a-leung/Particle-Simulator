@@ -73,10 +73,10 @@ class ParticlePool {
 				let B = this._pool[j];
 				if (!B.alive) break; // all particles afterward are 'dead'
 				if (A.distSqTo(B) <= (A.radius + B.radius) * (A.radius + B.radius)) { // overlap
-					// TODO fix fixed particle collisions
+					// TODO fix particle collisions
 					// no acceleration during a collision 
-					this._pool[i].acceleration = new Vector(0, 0);
-					this._pool[j].acceleration = new Vector(0, 0);
+					// this._pool[i].acceleration = new Vector(0, 0);
+					// this._pool[j].acceleration = new Vector(0, 0);
 					collisions[i] = true; // mark particles in a collision
 					collisions[j] = true;
 					if (A.inCollision && B.inCollision) continue; // don't update velocities if they are still overlapping
