@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel = "stylesheet" type = "text/css" href = "style/jquery-ui.min.css">
-		<link rel = "stylesheet" type = "text/css" href = "style/style.css">
-		<!-- Modularizing code -->
-		<script type = "text/javascript" src = "js/Color.js"></script>
-		<script type = "text/javascript" src = "js/Demo.js"></script>
-		<script type = "text/javascript" src = "js/Drawable.js"></script>
-		<script type = "text/javascript" src = "js/DrawableArrow.js"></script>
-		<script type = "text/javascript" src = "js/DrawableCircle.js"></script>
-		<script type = "text/javascript" src = "js/DummyParticle.js"></script>
-		<script type = "text/javascript" src = "js/Particle.js"></script>
-		<script type = "text/javascript" src = "js/ParticlePool.js"></script>
-		<script type = "text/javascript" src = "js/Vector.js"></script>
-		<script type = "text/javascript" src = "js/VelocityArrow.js"></script>
-		<script type = "text/javascript" src = "js/jquery-3.1.1.min.js"></script>
-		<script type = "text/javascript" src = "js/jquery-ui.min.js"></script>
-		<script type = "text/javascript" src = "js/script.js"></script>
-		<title>Electrostatics Simulation</title>
-	</head>
-	<body onload = "init()">
-		<div id = "container">
-			<h1>Electrostatics Simulation</h1>
-			<div id = "charge">Charge: 0 µC</div>
-			<div id = "slider"></div> <!-- To set charge -->
-			<input type = "button" id = "help" value = "Help">
-		</div>
-		<div id = "canvasContainter">
-			<!-- Multiple canvases allow for easy redrawing -->
-			<canvas id = "demo" width = "900" height = "600"></canvas> <!-- Main canvas -->
-			<canvas id = "arrows" width = "900" height = "600"></canvas> <!-- Canvas for velocity arrows -->
-			<canvas id = "dummy" width = "900" height = "600"></canvas> <!-- Canvas for launching particles -->
-		</div>
-	</body>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "style/jquery-ui.min.css">
+        <link rel = "stylesheet" type = "text/css" href = "style/style.css">
+        <!-- Modularizing code -->
+        <script type = "text/javascript" src = "js/Color.js"></script>
+        <script type = "text/javascript" src = "js/Demo.js"></script>
+        <script type = "text/javascript" src = "js/Drawable.js"></script>
+        <script type = "text/javascript" src = "js/DrawableArrow.js"></script>
+        <script type = "text/javascript" src = "js/DrawableCircle.js"></script>
+        <script type = "text/javascript" src = "js/DummyParticle.js"></script>
+        <script type = "text/javascript" src = "js/Particle.js"></script>
+        <script type = "text/javascript" src = "js/ParticlePool.js"></script>
+        <script type = "text/javascript" src = "js/Vector.js"></script>
+        <script type = "text/javascript" src = "js/VelocityArrow.js"></script>
+        <script type = "text/javascript" src = "js/jquery-3.1.1.min.js"></script>
+        <script type = "text/javascript" src = "js/jquery-ui.min.js"></script>
+        <script type = "text/javascript" src = "js/script.js"></script>
+        <title>Electrostatics Simulation</title>
+    </head>
+    <body onload = "init()">
+        <div id = "container">
+            <h1>Electrostatics Simulation</h1>
+            <div id = "charge">Charge: 0 µC</div>
+            <div id = "slider"></div> <!-- To set charge -->
+            <input type = "button" id = "help" value = "Help">
+        </div>
+        <div id = "canvasContainter">
+            <!-- Multiple canvases allow for easy redrawing -->
+            <canvas id = "demo" width = "900" height = "600"></canvas> <!-- Main canvas -->
+            <canvas id = "arrows" width = "900" height = "600"></canvas> <!-- Canvas for velocity arrows -->
+            <canvas id = "dummy" width = "900" height = "600"></canvas> <!-- Canvas for launching particles -->
+        </div>
+    </body>
 </html>
