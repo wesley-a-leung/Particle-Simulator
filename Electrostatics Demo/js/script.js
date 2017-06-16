@@ -16,42 +16,42 @@ var helpMessages = ["Click anywhere to spawn a particle.",
  * Initializes the demo.
  */
 function init() {
-	if (demo.init()) { // if the canvas was successfully initialized
-		demo.start();
-	} // if
-	$("#slider").slider({ // to control charge
-		value: 0, // defauly charge
-		min: -500, // minimum allowed charge
-		max: 500, // maximum allowed charge
-		step: 1,
-		slide: function(event, ui) {
-			$("#charge").html("Charge: " + ui.value + "µC");
-			sliderVal = ui.value;
-		} // anon function (slide)
-	}); // slider
-	dialog(0); // starts the help dialog chain
-	$('#help').click(function() { // adds the recursive function to the help button
-		dialog(0);
-	}); // click help
+    if (demo.init()) { // if the canvas was successfully initialized
+        demo.start();
+    } // if
+    $("#slider").slider({ // to control charge
+        value: 0, // defauly charge
+        min: -500, // minimum allowed charge
+        max: 500, // maximum allowed charge
+        step: 1,
+        slide: function(event, ui) {
+            $("#charge").html("Charge: " + ui.value + "µC");
+            sliderVal = ui.value;
+        } // anon function (slide)
+    }); // slider
+    dialog(0); // starts the help dialog chain
+    $('#help').click(function() { // adds the recursive function to the help button
+        dialog(0);
+    }); // click help
 } // init function
 
 /**
  * Recursively calls the function to display help messages one after another.
  */
 function dialog(i){
-	$("<div></div>").html(helpMessages[i]).dialog({
-		title: "Help",
-		show: {effect: "slide", direction: "right", duration: 1000},
-		hide: {effect: "slide", direction: "left", duration: 1000},
-		resizable: false,
-		modal: true,
-		buttons: {
-			"Next": function() {
-				$(this).dialog("close");
-				if (i < helpMessages.length - 1) dialog(i + 1);
-			} // anon function (Next button)
-		} // buttons
-	}); // dialog
+    $("<div></div>").html(helpMessages[i]).dialog({
+        title: "Help",
+        show: {effect: "slide", direction: "right", duration: 1000},
+        hide: {effect: "slide", direction: "left", duration: 1000},
+        resizable: false,
+        modal: true,
+        buttons: {
+            "Next": function() {
+                $(this).dialog("close");
+                if (i < helpMessages.length - 1) dialog(i + 1);
+            } // anon function (Next button)
+        } // buttons
+    }); // dialog
 } // dialog function
 
 /**
@@ -60,9 +60,9 @@ function dialog(i){
  * must be a global function and cannot be within an object.
  */
 function animate() {
-	requestAnimFrame(animate);
-	if (demo.particlePool) demo.particlePool.animate(); // animates all the particles if the pool exists
-	if (demo.dummyParticle) demo.dummyParticle.animate(); // animates the dummy particle if it exists
+    requestAnimFrame(animate);
+    if (demo.particlePool) demo.particlePool.animate(); // animates all the particles if the pool exists
+    if (demo.dummyParticle) demo.dummyParticle.animate(); // animates the dummy particle if it exists
 } // animate function
 
 /**
@@ -71,38 +71,38 @@ function animate() {
  * otherwise defaults to setTimeout().
  */
 window.requestAnimFrame = (function() {
-	return  window.requestAnimationFrame       ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame    ||
-			window.oRequestAnimationFrame      ||
-			window.msRequestAnimationFrame     ||
-			function(/* function */ callback, /* DOMElement */ element){
-				window.setTimeout(callback, 1000 / 60);
-			}; // anon function (callback)
+    return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            window.oRequestAnimationFrame      ||
+            window.msRequestAnimationFrame     ||
+            function(/* function */ callback, /* DOMElement */ element){
+                window.setTimeout(callback, 1000 / 60);
+            }; // anon function (callback)
 })(); // anon function (animation)
 
 /**
  * Detects if shift is pressed and sets the shiftDown variable to true.
  */
 document.onkeydown = function(event) {
-	// Firefox and opera use charCode instead of keyCode to
-	// return which key was pressed.
-	let keyCode = (event.keyCode) ? event.keyCode : event.charCode;
-	if (shiftKeyCode == keyCode) { // if shift is pressed
-		event.preventDefault(); // prevents default shift mapping
-		shiftDown = true;
-	} // if
+    // Firefox and opera use charCode instead of keyCode to
+    // return which key was pressed.
+    let keyCode = (event.keyCode) ? event.keyCode : event.charCode;
+    if (shiftKeyCode == keyCode) { // if shift is pressed
+        event.preventDefault(); // prevents default shift mapping
+        shiftDown = true;
+    } // if
 } // anon function (onkeydown)
 
 /**
  * Detects if shift is released and sets the shiftDown variable to false.
  */
 document.onkeyup = function(event) {
-	// Firefox and opera use charCode instead of keyCode to
-	// return which key was pressed.
-	let keyCode = (event.keyCode) ? event.keyCode : event.charCode;
-	if (shiftKeyCode == keyCode) { // if shift is released
-		event.preventDefault(); // prevents default shift mapping
-		shiftDown = false;
-	} // if
+    // Firefox and opera use charCode instead of keyCode to
+    // return which key was pressed.
+    let keyCode = (event.keyCode) ? event.keyCode : event.charCode;
+    if (shiftKeyCode == keyCode) { // if shift is released
+        event.preventDefault(); // prevents default shift mapping
+        shiftDown = false;
+    } // if
 } // anon function (onkeyup)
