@@ -25,7 +25,7 @@ class Vector {
     } // angle function
 
     /*
-     * function that returns a new vector that is the sum of vectors this vector and that vector,
+     * Returns a new vector that is the sum of vectors this vector and that vector,
      * leaving the original vectors unchanged.
      */
     plus(that) {
