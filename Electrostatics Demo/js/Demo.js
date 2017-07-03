@@ -35,15 +35,15 @@ class Demo {
         this.particlePool.get(20e-3, 200e-6, 650, 300, new Vector(0, 0), new Vector(0, 0), true);
         this.particlePool.get(20e-3, -200e-6, 650, 150, new Vector(-11.78, 0), new Vector(0, 0), false);
         this.arrowCanvas.addEventListener('mousedown', function(event) {
-            let xStart = event.pageX - this.offsetLeft; // saves starting x coordinate
-            let yStart = event.pageY - this.offsetTop; // saves starting y coordinate
-            let velocityArrow = new VelocityArrow(xStart, yStart);
-            demo.dummyParticle = new DummyParticle(xStart, yStart, 1, velocityArrow); // dummy particle starts with mass 1e-3 (radius = 1)
+            demo.xStart = event.pageX - this.offsetLeft; // saves starting x coordinate
+            demo.yStart = event.pageY - this.offsetTop; // saves starting y coordinate
+            let velocityArrow = new VelocityArrow(demo.xStart, demo.yStart);
+            demo.dummyParticle = new DummyParticle(demo.xStart, demo.yStart, 1, velocityArrow); // dummy particle starts with mass 1e-3 (radius = 1)
         }); // anon function (mousedown)
         this.arrowCanvas.addEventListener('mousemove', function(event) {
             if (demo.dummyParticle) { // only update arrow if there is a dummy particle (spawned at mousedown)
-                let xCur = event.pageX - this.offsetLeft; // saves current x coordinate
-                let yCur = event.pageY - this.offsetTop; // saves current y coordinate
+                let xCur = event.pageX - this.offsetLeft; // current x coordinate
+                let yCur = event.pageY - this.offsetTop; // current y coordinate
                 // the velocity arrow's end location is updated (negative of current location relative to start to
                 // act as a slingshot)
                 demo.dummyParticle.velocityArrow.updateEnd(
@@ -51,10 +51,11 @@ class Demo {
                     demo.dummyParticle.velocityArrow.y + (demo.dummyParticle.velocityArrow.y - yCur)); 
             } // if
         }); // anon function (mousemove)
-        this.arrowCanvas.addEventListener('click', function(event) {
-            let x = event.pageX - this.offsetLeft;
-            let y = event.pageY - this.offsetTop;
-            demo.particlePool.markClicked(x, y);
+        this.arrowCanvas.addEventListener('click', function(event) { // deletes a particle on click if both the start and end
+                                                                     // coordinates of the click are within the particle's radius
+            let xEnd = event.pageX - this.offsetLeft; // end x coordinate
+            let yEnd = event.pageY - this.offsetTop; // end y coordinate
+            demo.particlePool.markClicked(demo.xStart, demo.yStart, xEnd, yEnd);
         }); // anon function (click)
         document.addEventListener('mouseup', function(event) { // the mouseup listener is placed in the the document
                                                                // in case the user moves the mouse outside the canvas

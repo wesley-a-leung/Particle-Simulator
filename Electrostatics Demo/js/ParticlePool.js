@@ -103,7 +103,10 @@ class ParticlePool {
                         let v2fy = v2fxr * Math.sin(phi) + v2yr * Math.sin(phi + Math.PI / 2);
                         this._pool[i].velocity = new Vector(v1fx, v1fy);
                         this._pool[j].velocity = new Vector(v2fx, v2fy);
-                    } // if
+                    } else { // don't accelerate until outside of collision
+                        this._pool[i].acceleration = new Vector(0, 0);
+                        this._pool[j].acceleration = new Vector(0, 0);
+                    } // if else
                     // fixed particles should not change velocity
                     if (A.fixed) this._pool[i].velocity = new Vector(0, 0);
                     if (B.fixed) this._pool[j].velocity = new Vector(0, 0);
@@ -148,13 +151,14 @@ class ParticlePool {
      * Marks particles for deletion given a click location. Take N time to complete where N is the number
      * of alive particles.
      */
-    markClicked(x, y) {
+    markClicked(xStart, yStart, xEnd, yEnd) {
         for (let i = 1; i < this.size; i++) { // since the first particle is the one being created, it should not be deleted
                                               // unless there is another particle being deleted
             let A = this._pool[i]; // for non modification actions
             if (!A.alive) break; // all particles afterward are 'dead'
-            // if the click location is within the radius, then the particle has been clicked
-            if ((A.x - x) * (A.x - x) + (A.y - y) * (A.y - y) <= A.radius * A.radius) {
+            // if the both the start and end click location is within the radius, then the particle has been clicked
+            if (((A.x - xStart) * (A.x - xStart) + (A.y - yStart) * (A.y - yStart) <= A.radius * A.radius)
+                    && ((A.x - xEnd) * (A.x - xEnd) + (A.y - yEnd) * (A.y - yEnd) <= A.radius * A.radius)) {
                 this._pool[i].clicked = true; // mark the particle for deletion
                 this._pool[0].clicked = true; // also mark the particle being spawned for deletion
                 break; // to prevent multiple deletions
