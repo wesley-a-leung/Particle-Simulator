@@ -30,5 +30,5 @@ class Vector {
      */
     plus(that) {
         return new Vector(this.x + that.x, this.y + that.y);
-    } // sum function
+    } // plus function
 } // Vector class
