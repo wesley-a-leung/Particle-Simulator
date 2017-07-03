@@ -53,10 +53,10 @@ class ParticlePool {
                 // calculated electric force of B on A
                 let electricForce = B.electricForceOn(A);
                 // fixed particles should not change acceleration
-                if (!A.fixed) this._pool[i].acceleration.add(new Vector(electricForce.x / A.mass, electricForce.y / A.mass));
+                if (!A.fixed) this._pool[i].acceleration = A.acceleration.plus(new Vector(electricForce.x / A.mass, electricForce.y / A.mass));
                 // acceleration of particle B is changed by the same magnitude, but in the opposite direction of particle A
                 // according to Newton's 2nd Law
-                if (!B.fixed) this._pool[j].acceleration.add(new Vector(-electricForce.x / B.mass, -electricForce.y / B.mass));
+                if (!B.fixed) this._pool[j].acceleration = A.acceleration.plus(new Vector(-electricForce.x / B.mass, -electricForce.y / B.mass));
             } // for j
         } // for i
     } // update function
