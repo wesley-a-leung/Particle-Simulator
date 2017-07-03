@@ -11,14 +11,6 @@ class Vector {
     } // constructor
 
     /*
-     * Adds vector v to this vector.
-     */
-    add(v) {
-        this.x += v.x;
-        this.y += v.y;
-    } // add function
-
-    /*
      * Returns the magnitude of the vector.
      */
     magnitude() {
@@ -33,10 +25,10 @@ class Vector {
     } // angle function
 
     /*
-     * Static function that returns a new vector that is the sum of vectors a and b,
+     * Returns a new vector that is the sum of vectors a and b,
      * leaving the original vectors unchanged.
      */
-    static sum(a, b) {
-        return new Vector(a.x + b.x, a.y + b.y);
-    } // sum function
+    plus(that) {
+        return new Vector(this.x + that.x, this.y + that.y);
+    } // plus function
 } // Vector class

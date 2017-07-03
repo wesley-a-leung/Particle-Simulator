@@ -73,7 +73,7 @@ class Particle extends DrawableCircle {
     draw() {
         this.clearCircle(); // clears the old particle at the old location
         if (!this.fixed) { // only update particles that are not fixed
-            this.velocity.add(this.acceleration); // updates velocity
+            this.velocity = this.velocity.plus(this.acceleration); // updates velocity
             this.x += this.velocity.x; // updates x position
             this.y += this.velocity.y; // update y position
         } // if

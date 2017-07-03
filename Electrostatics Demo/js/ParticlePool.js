@@ -52,10 +52,10 @@ class ParticlePool {
                 if (!B.alive) break; // all particles afterward are 'dead'
                 // calculated electric force of B on A
                 let electricForce = B.electricForceOn(A);
-                this._pool[i].acceleration.add(new Vector(electricForce.x / A.mass, electricForce.y / A.mass));
+                this._pool[i].acceleration = A.acceleration.plus(new Vector(electricForce.x / A.mass, electricForce.y / A.mass));
                 // acceleration of particle B is changed by the same magnitude, but in the opposite direction of particle A
                 // according to Newton's 2nd Law
-                this._pool[j].acceleration.add(new Vector(-electricForce.x / B.mass, -electricForce.y / B.mass));
+                this._pool[j].acceleration = A.acceleration.plus(new Vector(-electricForce.x / B.mass, -electricForce.y / B.mass));
             } // for j
         } // for i
     } // update function
